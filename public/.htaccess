@@ -1,0 +1,12 @@
+# SPA fallback for Apache/cPanel hosting.
+# BrowserRouter routes (/register, /activate, ...) have no matching file on
+# disk — rewrite everything that isn't a real file/dir to index.html so React
+# Router can handle the URL. GitHub Pages ignores this file (it uses 404.html).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
